@@ -10,10 +10,21 @@
   font-family: "Montserrat", Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  color-scheme: light dark;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  --dark: #333333;
+  --light: #f4f4f4;
+  --form-bg: #dedede;
+  --form-dark: #5b5b5b;
+  --primary: #034732;
+  --secondary: ;
+  --accent: ;
 }
+
+body {
+  background-color: var(--light);
+}
+
 
 h1 {
   font-size: 4rem;
@@ -37,3 +48,19 @@ p {
   font-size: 1rem;
 }
 
+label,
+input,
+button {
+  font-family: "Montserrat", Arial, sans-serif;
+}
+
+button {
+  background-color: var(--primary);
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 1.25rem;
+  line-height: 1;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer; 
+}

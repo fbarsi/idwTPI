@@ -1,5 +1,5 @@
 nav {
-    background-color: #000000;
+    background-color: var(--dark);
     height: 4rem;
     padding: 0 1rem;
     display: flex;
