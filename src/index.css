@@ -27,18 +27,9 @@ h1 {
   font-size: 4rem;
 }
 h2 {
-  font-size: 2.5rem;
-}
-h3 {
-  font-size: 2rem;
-}
-h4 {
-  font-size: 1.75rem;
-}
-h5 {
   font-size: 1.5rem;
 }
-h6 {
+h3 {
   font-size: 1.25rem;
 }
 p {
@@ -65,11 +56,11 @@ button {
 button {
   background-color: var(--primary);
   color: #ffffff;
-  font-weight: 600;
-  font-size: 1.25rem;
+  font-weight: 500;
+  font-size: 1rem;
   line-height: 1;
   border: none;
-  border-radius: 20px;
+  border-radius: 16px;
   cursor: pointer; 
 }
 
@@ -77,16 +68,16 @@ input {
   background-color: var(--form-bg);
   color: var(--form-dark);
   font-weight: 400;
-  font-size: 1.25rem;
+  font-size: 1rem;
   line-height: 1;
-  border-radius: 20px;
+  border-radius: 16px;
   border: 1px solid var(--form-dark);
   cursor: pointer; 
 }
 
 label {
   font-weight: 400;
-  font-size: 1.25rem;
+  font-size: 1rem;
   line-height: 1;
 }
 
