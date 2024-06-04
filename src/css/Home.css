@@ -1,0 +1,124 @@
+.layout {
+    width: 100%;
+    display: flex;
+    gap: 120px;
+}
+
+/* LAYOUT FLEX */
+
+.layout-flex {
+    width: 480px;
+}
+
+.main-title {
+    font-weight: 600;
+    font-size: 5rem;
+    line-height: 1;
+}
+
+.subtitle {
+    opacity: 0.7;
+    margin-top: 30px;
+    font-weight: 500;
+    font-size: 2rem;
+    max-width: 95%;
+}
+
+.button-primary {
+    width: 100%;
+    padding: 20px;
+    margin-top: 40px;
+}
+
+.form-title {
+    margin-top: 74px;
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 1;
+    max-width: 100%;
+}
+
+form {
+    margin-top: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+.form-control,
+.date-input,
+.button-secondary,
+.checkbox-label {
+    padding: 20px;
+}
+
+.form-control {
+    width: 480px;
+}
+
+.date-input {
+    width: 230px;
+}
+
+.button-secondary {
+    width: 180px;
+}
+
+.checkbox-label {
+    color: var(--form-dark);
+    cursor: pointer; 
+}
+
+.checkbox-input {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+
+
+
+/* LAYOUT GRID */
+
+.layout-grid {
+    width: 580px;
+    height: 835px;
+    display: grid;
+    gap: 20px;
+    grid-template-rows: repeat(4, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.layout-grid img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+}
+
+.img-1 {
+    grid-area: span 2 / span 2;
+}
+
+.img-3 {
+    grid-row: span 2;
+}
+
+
+
+
+
+/* CARDS */
+
+.card-list-title {
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.card-list {
+    width: 100%;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}

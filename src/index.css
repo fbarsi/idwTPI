@@ -7,9 +7,6 @@
 }
 
 :root {
-  font-family: "Montserrat", Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   --dark: #333333;
@@ -48,10 +45,21 @@ p {
   font-size: 1rem;
 }
 
+
+h1, 
+h2, 
+h3, 
+h4, 
+h5, 
+h6, 
+p,
+li,
 label,
 input,
 button {
   font-family: "Montserrat", Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
 }
 
 button {
@@ -63,4 +71,26 @@ button {
   border: none;
   border-radius: 20px;
   cursor: pointer; 
+}
+
+input {
+  background-color: var(--form-bg);
+  color: var(--form-dark);
+  font-weight: 400;
+  font-size: 1.25rem;
+  line-height: 1;
+  border-radius: 20px;
+  border: 1px solid var(--form-dark);
+  cursor: pointer; 
+}
+
+label {
+  font-weight: 400;
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+input::placeholder {
+  color: var(--form-dark);
+  opacity: 1;
 }

@@ -6,8 +6,9 @@ import { Admin } from './pages/Admin';
 import { Contact } from './pages/Contact';
 import { About } from './pages/About';
 import { Home } from "./pages/Home";
+import Footer from './components/Footer';
 
-function App() {
+const App = () => {
   return (
     <Router>
       <div className="App">
@@ -23,11 +24,11 @@ function App() {
           </Routes>
         </main>
         <footer>
-
+          <Footer />
         </footer>
       </div>
     </Router>
   );
 }
 
-export default App
+export default App;

@@ -1,3 +1,5 @@
-export const Admin = () => {
+const Admin = () => {
     return <>Admin</>;
 }
+
+export default Admin;

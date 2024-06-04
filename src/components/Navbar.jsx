@@ -1,7 +1,7 @@
-import "./Navbar.css";
+import "../css/Navbar.css";
 import { Link } from 'react-router-dom';
 
-export const Navbar = () => {
+const Navbar = () => {
     return <nav>
         <Link className="logo-techin" to="/">
             <img src="/img/logo.png" alt="a" />
@@ -13,3 +13,5 @@ export const Navbar = () => {
         </ul>
     </nav>;
 }
+
+export default Navbar;
