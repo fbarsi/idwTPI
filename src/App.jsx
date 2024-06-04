@@ -1,11 +1,11 @@
 import { useState } from 'react'
-import { Navbar } from './components/Navbar'
+import Navbar from './components/Navbar'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css'
-import { Admin } from './pages/Admin';
-import { Contact } from './pages/Contact';
-import { About } from './pages/About';
-import { Home } from "./pages/Home";
+import Admin from './pages/Admin';
+import Contact from './pages/Contact';
+import About from './pages/About';
+import Home from "./pages/Home";
 import Footer from './components/Footer';
 
 const App = () => {

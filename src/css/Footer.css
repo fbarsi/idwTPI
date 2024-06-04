@@ -1,0 +1,46 @@
+.footer {
+    width: 944px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 24px 0;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer-logo {
+    height: 64px;
+}
+
+
+.footer-links {
+    display: flex;
+    gap: 16px;
+}
+
+.footer-links ul {
+    text-align: end;
+    width: 144px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.footer-links ul li {
+    list-style-type: none;
+}
+
+.footer-links ul li a {
+    color:#ffffff;
+    text-decoration: none;
+    font-size: 0.8rem;
+}
+
+.footer-flex {
+    display: flex;
+    gap: 24px;
+}

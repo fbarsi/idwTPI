@@ -3,42 +3,44 @@ import "../css/Footer.css"
 const Footer = () => {
     return(
         <>
-            <section>
-                <div>
-                    <p>Tech-in</p>
-                    <p>Stay, relax, enjoy.</p>
-                </div>
-                <div>
-                    <ul>
-                        <li>Company</li>
-                        <li>About</li>
-                        <li>Careers</li>
-                        <li>Newsroom</li>
-                    </ul>
-                    <ul>
-                        <li>Amenities</li>
-                        <li>Free Wi-Fi</li>
-                        <li>Spa & Pool</li>
-                        <li>Events</li>
-                    </ul>
-                    <ul>
-                        <li>Social</li>
-                        <li>Twitter</li>
-                        <li>Instagram</li>
-                        <li>Threads</li>
-                    </ul>
-                </div>
-            </section>
+        <div className="footer">
+        <section className="footer-container">
+            <div>
+                <img className="footer-logo" src="/img/logo.png" alt="a" />
+                <p>Stay, relax, enjoy.</p>
+            </div>
+            <div className="footer-links">
+                <ul>
+                    <li><a href="#">Company</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Newsroom</a></li>
+                </ul>
+                <ul>
+                    <li><a href="#">Amenities</a></li>
+                    <li><a href="#">Free Wi-Fi</a></li>
+                    <li><a href="#">Spa & Pool</a></li>
+                    <li><a href="#">Events</a></li>
+                </ul>
+                <ul>
+                    <li><a href="#">Social</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Threads</a></li>
+                </ul>
+            </div>
+        </section>
 
-            <hr className=""/>
+        <hr className=""/>
 
-            <section>
-                <small>&copy; 2024 Tech-in</small>
-                <div>
-                    <h6>Policies</h6>
-                    <h6>Cookies</h6>
-                </div>
-            </section>
+        <section className="footer-container">
+            <small>&copy; 2024 Tech-in</small>
+            <div className="footer-flex">
+                <p>Policies</p>
+                <p>Cookies</p>
+            </div>
+        </section>
+        </div>
         </>
     );
 }

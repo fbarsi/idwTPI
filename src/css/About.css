@@ -1,0 +1,10 @@
+
+.about-container p{
+    max-width: 60ch;
+    font-size: 20px;
+}
+
+.imagen-ab {
+    width: 100%;
+    object-fit: cover;
+}

@@ -9,8 +9,8 @@ const Card = ({ imagen, titulo, ciudad, caracteristicas, precio}) => {
                 <h3 className="card-title">{titulo}</h3>
                 <p className="card-subtitle opacity70">{ciudad}</p>
                 <ul>
-                    {caracteristicas.map((caracteristica) => (
-                        <li>- {caracteristica}</li>
+                    {caracteristicas.map((caracteristica, index) => (
+                        <li key={index}>- {caracteristica}</li>
                     ))}
                 </ul>
                 <h3 className="price">{precio} <span className="opacity70">/ noche</span></h3>

@@ -1,5 +1,6 @@
 main {
   padding-top: 8rem;
+  padding-bottom: 7rem;
   width: 944px;
   margin: 0 auto;
   display: flex;
@@ -8,11 +9,6 @@ main {
 }
 
 footer {
-  width: 944px;
-  margin: 0 auto;
   background-color: var(--dark);
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  padding: 24px 0;
+  color: var(--light);
 }

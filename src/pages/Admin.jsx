@@ -1,5 +1,9 @@
 const Admin = () => {
-    return <>Admin</>;
+    return( 
+        <>
+            Acá va el formulario de admin.
+        </>
+    );
 }
 
 export default Admin;

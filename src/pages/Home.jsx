@@ -21,10 +21,10 @@ const Home = () => {
                     </form>
                 </section>
                 <section className="layout-grid">
-                    <img class="img-1" src="/img/26517c.png" alt="a" />
-                    <img class="img-2" src="/img/0b7f2a.png" alt="a" />
-                    <img class="img-3" src="/img/26517c.png" alt="a" /> 
-                    <img class="img-4" src="/img/fcd0b3.png" alt="a" />
+                    <img className="img-1" src="/img/26517c.png" alt="a" />
+                    <img className="img-2" src="/img/0b7f2a.png" alt="a" />
+                    <img className="img-3" src="/img/26517c.png" alt="a" /> 
+                    <img className="img-4" src="/img/fcd0b3.png" alt="a" />
                 </section>
             </div>
 
