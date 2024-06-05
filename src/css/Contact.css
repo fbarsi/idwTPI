@@ -1,48 +1,30 @@
-.conteiner-form{
+.contact-layout{
+    width: 100%;
     display: flex;
     justify-content: space-between;
+    gap: 16px;
 }
-.contenido-form{
+
+.contact-form,
+.contact-text-area, 
+.button-form{
     width: 544px;
 }
 
-.titulo-form{
-    padding-left: 16px;
-    font-size: 32px;
-    font-weight: 700;
+.contact-text-area{
+    resize: none;
 }
 
-.for{
-    margin-top: 0;
-}
-
-.input-form {
+.contact-form .contact-input {
     width: 264px;
-    height: 58px;
-    padding: 16px;
-    border: 16px;
-    background-color: var(--light);
-    border-radius: 16px;
-    border: 1px black solid;
 }
 
-.t {
-    width: 544px;
-    height: 134px;
-    background-color: var(--light);
-    padding: 16px;
-    font-size: 16px;
-    font-family: Montserrat, sans-serif;
-    border-radius: 16px;
-}
-button{
-    width: 544px;
-    height: 58px;
-    font-family: Montserrat, sans-serif;
+.contact-form .form-title {
+
 }
 
 .img-form {
-    width: 384px;
+    width: 100%;
+    object-fit: cover;
     border-radius: 16px;
-    
 }
