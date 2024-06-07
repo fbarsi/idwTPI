@@ -14,6 +14,8 @@
   --form-bg: #dedede;
   --form-dark: #5b5b5b;
   --primary: #034732;
+  --accept:  #aaffaa;
+  --cancel:  #ffaaaa;
   /* --secondary: ;
   --accent: ; */
 }
@@ -107,3 +109,48 @@ form {
   gap: 16px;
   justify-content: space-between;
 }
+
+.admin-list {
+  /* border: 1px solid black; */
+}
+
+.admin-item-list {
+  /* border: 1px solid #cccccc; */
+  padding: 8px 16px;
+  display: flex; 
+  justify-content: space-between;
+}
+
+.mg-left{
+  margin-left: 8px;
+}
+
+.input-admin,
+.btn-admin {
+  height: 36px;
+  background-color: transparent;
+  border: 1px solid #888;
+  padding: 8px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  color: var(--dark);
+  outline: none;
+  font-weight: 400;
+}
+
+.btn-admin {
+  width: 86px;
+}
+
+.btn-color {
+  /* background-color: #c5d4ff; */
+}
+
+.btn-accept {
+  background-color: var(--accept);
+}
+
+.btn-cancel {
+  background-color: var(--cancel);
+}
+

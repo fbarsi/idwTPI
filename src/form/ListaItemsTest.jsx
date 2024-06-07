@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
-const Admin = () => {
+function ListaItemsTest() {
   const [items, setItems] = useState([]);
   const [descripcionAModificar, setDescripcionAModificar] = useState('');
-  const [descripcionAgregar, setDescripcionAgregar] = useState(null);
+  const [descripcionAgregar, setDescripcionAgregar] = useState('');
   const [descripcionOriginal, setDescripcionOriginal] = useState('');
   const [itemAModificar, setItemAModificar] = useState(null);
   const [mostrarInput, setMostrarInput] = useState(false);
@@ -41,7 +41,7 @@ const Admin = () => {
             Descripcion: descripcionAgregar
         };
         setItems(oldItems => [...oldItems, nuevoItem]);
-        setDescripcionAgregar(null);
+        setDescripcionAgregar('');
       } else {
         alert('Error al crear el tipo de alojamiento')
       }
@@ -112,12 +112,6 @@ const Admin = () => {
     agregarItem();
     setMostrarInput(false);
   };
-
-  const cancelarAgregar = () => {
-    setDescripcionAgregar('');
-    setMostrarInput(false);
-  };
-
   const manejarKeyDown = (e, funcion) => {
     if (e.key === 'Enter') {
       funcion();
@@ -125,28 +119,23 @@ const Admin = () => {
   };
 
   return (
-    <div className='admin-list'>
+    <div>
       {items.map((item, index) => (
-        <div className='admin-item-list' key={item.idTipoAlojamiento} style={{backgroundColor: index % 2 === 0 ? '#dddddd' : '#cccccc' }}>
+        <div key={item.idTipoAlojamiento} style={{ display: 'flex', justifyContent: 'space-between', backgroundColor: index % 2 === 0 ? 'lightgray' : 'white' }}>
           {itemAModificar === item.idTipoAlojamiento ? (
             <>
-              <input 
-                className='input-admin' 
-                value={descripcionAModificar} 
-                onChange={(e) => setDescripcionAModificar(e.target.value)} 
-                autoFocus
-              />
+              <input value={descripcionAModificar} onChange={(e) => setDescripcionAModificar(e.target.value)} autoFocus/>
               <div>
-                <button className='btn-admin btn-accept' onClick={() => modificarItem(item.idTipoAlojamiento, descripcionAModificar)}>Guardar</button>
-                <button className='btn-admin btn-cancel mg-left' onClick={cancelarModificacion}>Cancelar</button>
+                <button onClick={() => modificarItem(item.idTipoAlojamiento, descripcionAModificar)}>Guardar</button>
+                <button onClick={cancelarModificacion}>Cancelar</button>
               </div>
             </>
           ) : (
             <>
-              <p style={{ flex: 1, alignContent:'center'}}>{item.Descripcion}</p>
+              <p style={{ flex: 1 }}>{item.Descripcion}</p>
               <div>
-                <button className='btn-admin btn-color' onClick={() => iniciarModificacion(item.idTipoAlojamiento)}>Modificar</button>
-                <button className='btn-admin btn-color mg-left' onClick={() => eliminarItem(item.idTipoAlojamiento)}>Eliminar</button>
+                <button onClick={() => iniciarModificacion(item.idTipoAlojamiento)}>Modificar</button>
+                <button onClick={() => eliminarItem(item.idTipoAlojamiento)}>Eliminar</button>
               </div>
             </>
           )}
@@ -154,21 +143,14 @@ const Admin = () => {
       ))}
       {mostrarInput ? (
         <>
-          <input 
-            className='input-admin' 
-            value={descripcionAgregar} 
-            onChange={(e) => setDescripcionAgregar(e.target.value)} 
-            onKeyDown={(e) => manejarKeyDown(e, manejarSubmit)} 
-            autoFocus
-          />
-          <button className='btn-admin btn-accept mg-left' onClick={manejarSubmit}>Aceptar</button>
-          <button className='btn-admin btn-cancel mg-left' onClick={cancelarAgregar}>Cancelar</button>
+          <input value={descripcionAgregar} onChange={(e) => setDescripcionAgregar(e.target.value)} onKeyDown={(e) => manejarKeyDown(e, manejarSubmit)} autoFocus/>
+          <button onClick={manejarSubmit}>Aceptar</button>
         </>
       ) : (
-        <button className='input-admin btn-color' onClick={manejarClickAgregar}>Agregar item</button>
+        <button onClick={manejarClickAgregar}>Agregar item</button>
       )}
     </div>
   );
 }
 
-export default Admin;
+export default ListaItemsTest;
