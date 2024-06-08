@@ -1,11 +1,11 @@
 main {
-  padding-top: 8rem;
-  padding-bottom: 7rem;
-  width: 944px;
+  padding-top: 8em;
+  padding-bottom: 7em;
+  width: 59em;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 105px;
+  gap: 6.5em;
 }
 
 footer {

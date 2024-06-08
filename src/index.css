@@ -14,26 +14,25 @@
   --form-bg: #dedede;
   --form-dark: #5b5b5b;
   --primary: #034732;
-  /* --secondary: ;
-  --accent: ; */
-}
-
+  }
+  
 body {
   background-color: var(--light);
+  font-size: 1.25rem;
 }
 
 
 h1 {
-  font-size: 4rem;
+  font-size: 4em;
 }
 h2 {
-  font-size: 1.5rem;
+  font-size: 1.5em;
 }
 h3 {
-  font-size: 1.25rem;
+  font-size: 1.25em;
 }
 p {
-  font-size: 1rem;
+  font-size: 1em;
 }
 
 
@@ -58,12 +57,12 @@ button {
   background-color: var(--primary);
   color: #ffffff;
   font-weight: 500;
-  font-size: 1rem;
+  font-size: 1em;
   line-height: 1;
   border: none;
-  border-radius: 16px;
+  border-radius: 1em;
   cursor: pointer; 
-  padding: 16px;
+  padding: 1em;
 }
 
 input,
@@ -71,17 +70,17 @@ textarea {
   background-color: var(--form-bg);
   color: var(--form-dark);
   font-weight: 400;
-  font-size: 1rem;
+  font-size: 1em;
   line-height: 1;
-  padding: 16px;
-  border-radius: 16px;
+  padding: 1em;
+  border-radius: 1em;
   border: 1px solid var(--form-dark);
   cursor: pointer; 
 }
 
 label {
   font-weight: 400;
-  font-size: 1rem;
+  font-size: 1em;
   line-height: 1;
 }
 
@@ -101,9 +100,52 @@ textarea::placeholder {
 }
 
 form {
-  margin-top: 24px;
+  margin-top: 1em;
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
+  gap: 1em;
   justify-content: space-between;
+}
+
+.admin-item-list {
+  padding: 0.5em 1em;
+  display: flex; 
+  justify-content: space-between;
+}
+
+.mg-left{
+  margin-left: 0.5em;
+}
+
+.input-admin,
+.btn-admin {
+  height: 2.25em;
+  padding: 0.5em;
+  background-color: transparent;
+  color: var(--dark);
+  border: 1px solid var(--dark);
+  border-radius: 0.25em;
+  font-size: 0.9em;
+  font-weight: 400;
+  outline: none;
+}
+
+.btn-admin {
+  width: 5.5em;
+}
+
+.btn-accept {
+  background-color: var(--dark);
+  color: var(--form-bg);
+
+}
+
+.btn-cancel {
+  background-color: var(--cancel);
+}
+
+@media (max-width: 1400px) {
+  body {
+    font-size: 1rem;
+  }
 }

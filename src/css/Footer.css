@@ -1,10 +1,10 @@
 .footer {
-    width: 944px;
+    width: 59em;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 24px;
-    padding: 24px 0;
+    gap: 1.5em;
+    padding: 1.5em 0;
 }
 
 .footer-container {
@@ -13,21 +13,21 @@
 }
 
 .footer-logo {
-    height: 64px;
+    height: 4em;
 }
 
 
 .footer-links {
     display: flex;
-    gap: 16px;
+    gap: 1em;
 }
 
 .footer-links ul {
     text-align: end;
-    width: 144px;
+    width: 9em;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 1em;
 }
 
 .footer-links ul li {
@@ -37,10 +37,10 @@
 .footer-links ul li a {
     color:#ffffff;
     text-decoration: none;
-    font-size: 0.8rem;
+    font-size: 0.8em;
 }
 
 .footer-flex {
     display: flex;
-    gap: 24px;
+    gap: 1.5em;
 }
