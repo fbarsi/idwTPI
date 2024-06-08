@@ -24,30 +24,11 @@
 
 .button-primary {
     width: 100%;
-    padding: 16px;
     margin-top: 32px;
 }
 
-.form-title {
+.layout-flex .form-title {
     margin-top: 60px;
-    font-weight: 500;
-    line-height: 1;
-    max-width: 100%;
-}
-
-form {
-    margin-top: 24px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-    justify-content: space-between;
-}
-
-.form-control,
-.date-input,
-.button-secondary,
-.checkbox-label {
-    padding: 16px;
 }
 
 .form-control {
@@ -63,6 +44,7 @@ form {
 }
 
 .checkbox-label {
+    padding: 16px;
     color: var(--form-dark);
     cursor: pointer; 
 }

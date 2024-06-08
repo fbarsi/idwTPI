@@ -47,7 +47,8 @@ p,
 li,
 label,
 input,
-button {
+button,
+textarea {
   font-family: "Montserrat", Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -62,14 +63,17 @@ button {
   border: none;
   border-radius: 16px;
   cursor: pointer; 
+  padding: 16px;
 }
 
-input {
+input,
+textarea {
   background-color: var(--form-bg);
   color: var(--form-dark);
   font-weight: 400;
   font-size: 1rem;
   line-height: 1;
+  padding: 16px;
   border-radius: 16px;
   border: 1px solid var(--form-dark);
   cursor: pointer; 
@@ -84,4 +88,22 @@ label {
 input::placeholder {
   color: var(--form-dark);
   opacity: 1;
+}
+textarea::placeholder {
+  color: var(--form-dark);
+  opacity: 1;
+}
+
+.form-title {
+  font-weight: 500;
+  line-height: 1;
+  max-width: 100%;
+}
+
+form {
+  margin-top: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: space-between;
 }

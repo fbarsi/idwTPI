@@ -1,7 +1,9 @@
+import AddTipoAlojamiento from "../form/AddTipoAlojamiento";
+
 const Admin = () => {
     return( 
         <>
-            Acá va el formulario de admin.
+           <AddTipoAlojamiento />
         </>
     );
 }
