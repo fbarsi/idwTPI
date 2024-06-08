@@ -2,13 +2,13 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
-    gap: 16px;
+    gap: 1em;
 }
 
 .contact-form,
 .contact-text-area, 
 .button-form{
-    width: 544px;
+    width: 34em;
 }
 
 .contact-text-area{
@@ -16,15 +16,11 @@
 }
 
 .contact-form .contact-input {
-    width: 264px;
-}
-
-.contact-form .form-title {
-
+    width: 16.5em;
 }
 
 .img-form {
     width: 100%;
     object-fit: cover;
-    border-radius: 16px;
+    border-radius: 1em;
 }

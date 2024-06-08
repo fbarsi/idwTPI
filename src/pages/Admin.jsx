@@ -126,6 +126,8 @@ const Admin = () => {
 
   return (
     <div className='admin-list'>
+			<h2 style={{fontWeight: '500'}}>Modo administrador</h2>
+			<h3 style={{color: 'red', marginBottom: '32px'}}>¡Precaución! Eliminar un item es un cambio irreversible.</h3>
       {items.map((item, index) => (
         <div className='admin-item-list' key={item.idTipoAlojamiento} style={{backgroundColor: index % 2 === 0 ? '#dddddd' : '#cccccc' }}>
           {itemAModificar === item.idTipoAlojamiento ? (
@@ -138,7 +140,7 @@ const Admin = () => {
               />
               <div>
                 <button className='btn-admin btn-accept' onClick={() => modificarItem(item.idTipoAlojamiento, descripcionAModificar)}>Guardar</button>
-                <button className='btn-admin btn-cancel mg-left' onClick={cancelarModificacion}>Cancelar</button>
+                <button className='btn-admin mg-left' onClick={cancelarModificacion}>Cancelar</button>
               </div>
             </>
           ) : (
@@ -158,14 +160,15 @@ const Admin = () => {
             className='input-admin' 
             value={descripcionAgregar} 
             onChange={(e) => setDescripcionAgregar(e.target.value)} 
-            onKeyDown={(e) => manejarKeyDown(e, manejarSubmit)} 
+            onKeyDown={(e) => manejarKeyDown(e, manejarSubmit)}
+						style={{marginTop:'1em'}} 
             autoFocus
           />
           <button className='btn-admin btn-accept mg-left' onClick={manejarSubmit}>Aceptar</button>
-          <button className='btn-admin btn-cancel mg-left' onClick={cancelarAgregar}>Cancelar</button>
+          <button className='btn-admin mg-left' onClick={cancelarAgregar}>Cancelar</button>
         </>
       ) : (
-        <button className='input-admin btn-color' onClick={manejarClickAgregar}>Agregar item</button>
+        <button className='input-admin btn-color' onClick={manejarClickAgregar} style={{marginTop:'1em', padding: '1em 2em', height:'auto'}}>Agregar item</button>
       )}
     </div>
   );
