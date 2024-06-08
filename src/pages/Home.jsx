@@ -9,9 +9,9 @@ const Home = () => {
             <div className="layout">
                 <section className="layout-flex">
                     <h1 className="main-title">Explora Descansa Repite</h1>
-                    <h2 className="subtitle">Confort que te acompaña en cada viaje</h2>
+                    <h3 className="subtitle">Confort que te acompaña en cada viaje</h3>
                     <button className="button-primary">Descubre más</button>
-                    <h2 className="form-title">Encuentra tu lugar ideal</h2>
+                    <h3 className="form-title">Encuentra tu lugar ideal</h3>
                     <form className="form">
                         <input type="text" className="form-control" placeholder="Selecciona destino" aria-label="Selecciona destino" />
                         <DateInput placeholderText={"Fecha de ida"} />
@@ -29,7 +29,7 @@ const Home = () => {
             </div>
 
             <div>
-                <h2 className="card-list-title">Mejores calificados del mes</h2>
+                <h3 className="card-list-title">Mejores calificados del mes</h3>
                 <div className="card-list">
                     <Card
                         imagen="/img/destino/lugar1.jpeg"
@@ -64,7 +64,7 @@ const Home = () => {
             </div>
 
             <div>
-                <h2 className="card-list-title">Ofertas exclusivas</h2>
+                <h3 className="card-list-title">Ofertas exclusivas</h3>
                 <div className="card-list">
                     <Card
                         imagen="/img/destino/lugar5.jpg"

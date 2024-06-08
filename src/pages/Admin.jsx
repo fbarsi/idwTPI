@@ -127,7 +127,7 @@ const Admin = () => {
   return (
     <div className='admin-list'>
 			<h2 style={{fontWeight: '500'}}>Modo administrador</h2>
-			<h3 style={{color: 'red', marginBottom: '32px'}}>¡Precaución! Eliminar un item es un cambio irreversible.</h3>
+			<h4 style={{color: 'red', marginBottom: '32px'}}>¡Precaución! Eliminar un item es una acción irreversible.</h4>
       {items.map((item, index) => (
         <div className='admin-item-list' key={item.idTipoAlojamiento} style={{backgroundColor: index % 2 === 0 ? '#dddddd' : '#cccccc' }}>
           {itemAModificar === item.idTipoAlojamiento ? (

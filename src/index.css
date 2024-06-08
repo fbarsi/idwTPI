@@ -21,21 +21,6 @@ body {
   font-size: 1.25rem;
 }
 
-
-h1 {
-  font-size: 4em;
-}
-h2 {
-  font-size: 1.5em;
-}
-h3 {
-  font-size: 1.25em;
-}
-p {
-  font-size: 1em;
-}
-
-
 h1, 
 h2, 
 h3, 
@@ -52,6 +37,25 @@ textarea {
   line-height: 1.5;
   font-weight: 400;
 }
+
+h1 {
+  font-size: 4em;
+  font-weight: 600;
+}
+h2 {
+  font-size: 2em;
+  font-weight: 500;
+}
+h3 {
+  font-size: 1.5em;
+  font-weight: 500;
+}
+h4,
+p {
+  font-size: 1em;
+}
+
+
 
 button {
   background-color: var(--primary);
@@ -94,7 +98,6 @@ textarea::placeholder {
 }
 
 .form-title {
-  font-weight: 500;
   line-height: 1;
   max-width: 100%;
 }
@@ -107,13 +110,17 @@ form {
   justify-content: space-between;
 }
 
+.admin-list {
+  min-height: 400px;
+}
+
 .admin-item-list {
   padding: 0.5em 1em;
   display: flex; 
   justify-content: space-between;
 }
 
-.mg-left{
+.mg-left {
   margin-left: 0.5em;
 }
 
