@@ -14,10 +14,6 @@
   --form-bg: #dedede;
   --form-dark: #5b5b5b;
   --primary: #034732;
-  --accept:  #74db76;
-  --cancel:  #ffaaaa;
-  /* --secondary: ;
-  --accent: ; */
   }
   
 body {
@@ -111,12 +107,7 @@ form {
   justify-content: space-between;
 }
 
-.admin-list {
-  /* border: 1px solid black; */
-}
-
 .admin-item-list {
-  /* border: 1px solid #cccccc; */
   padding: 0.5em 1em;
   display: flex; 
   justify-content: space-between;
@@ -129,26 +120,21 @@ form {
 .input-admin,
 .btn-admin {
   height: 2.25em;
-  background-color: transparent;
-  border: 1px solid var(--dark);
   padding: 0.5em;
+  background-color: transparent;
+  color: var(--dark);
+  border: 1px solid var(--dark);
   border-radius: 0.25em;
   font-size: 0.9em;
-  color: var(--dark);
-  outline: none;
   font-weight: 400;
+  outline: none;
 }
 
 .btn-admin {
   width: 5.5em;
 }
 
-.btn-color {
-  /* background-color: #c5d4ff; */
-}
-
 .btn-accept {
-  /* background-color: var(--accept); */
   background-color: var(--dark);
   color: var(--form-bg);
 
