@@ -23,8 +23,8 @@ const Home = () => {
                 <section className="layout-grid">
                     <img className="img-1" src="/img/26517c.webp" alt="a" />
                     <img className="img-2" src="/img/0b7f2a.webp" alt="a" />
-                    <img className="img-3" src="/img/26517c.webp" alt="a" /> 
-                    <img className="img-4" src="/img/fcd0b3.webp" alt="a" />
+                    <img className="img-3" src="/img/fcd0b3.webp" alt="a" />
+                    <img className="img-4" src="/img/26517c.webp" alt="a" /> 
                 </section>
             </div>
 
