@@ -16,7 +16,10 @@ const Contact = () => {
                 <button className='button-form' type="submit" >Enviar</button>
             </form>
         </div>
-        <img className="img-form" src='/img/contact-img.webp'></img>
+        <div>
+            <img className="img-form" src='/img/contact-img.webp'></img>
+        </div>
+
     </div>
 </>);
 }
