@@ -14,7 +14,7 @@
   --form-bg: #dedede;
   --form-dark: #5b5b5b;
   --primary: #034732;
-  }
+}
   
 body {
   background-color: var(--light);
@@ -138,7 +138,7 @@ form {
 }
 
 .btn-admin {
-  width: 5.5em;
+  width: 6em;
 }
 
 .btn-accept {

@@ -1,102 +1,67 @@
 import React, { useState, useEffect } from 'react';
+import { agregarItem, eliminarItem, modificarItem } from '../commands/TipoAlojamiento';
+
 
 const Admin = () => {
-  const [items, setItems] = useState([]);
+  const [listaTiposAlojamiento, setListaTiposAlojamiento] = useState([]);
+  const [datosTipoAlojamiento, setDatosTipoAlojamiento] = useState({
+    Descripcion: ''
+  });
+  
   const [descripcionAModificar, setDescripcionAModificar] = useState('');
-  const [descripcionAgregar, setDescripcionAgregar] = useState(null);
   const [descripcionOriginal, setDescripcionOriginal] = useState('');
-  const [itemAModificar, setItemAModificar] = useState(null);
+  const [descripcionAgregar, setDescripcionAgregar] = useState('');
+  const [itemAModificar, setItemAModificar] = useState('');
   const [mostrarInput, setMostrarInput] = useState(false);
 
+  // Comandos TipoAlojamiento
   useEffect(() => {
-    const obtenerItems = async () => {
+    const obtenerTiposAlojamiento = async () => {
       try {
         const response = await fetch('http://localhost:3001/tiposAlojamiento/getTiposAlojamiento');
         const data = await response.json();
-        setItems(data);
+        setListaTiposAlojamiento(data);
       } catch (error) {
         console.error('Error:', error);
       }
     };
-    obtenerItems();
+    obtenerTiposAlojamiento();
   }, []);
 
-  const agregarItem = async () => {
+  const agregarTipoAlojamiento = async () => {
     const data = {
       Descripcion: descripcionAgregar
     };
-
-    try {
-      const response = await fetch('http://localhost:3001/tiposAlojamiento/createTipoAlojamiento', {
-        method: 'POST',
-        headers: {
-          'Content-type': 'application/json'
-        },
-        body: JSON.stringify(data)
-      });
-      if (response.ok) {
-        const respuesta = await response.json();
-        const nuevoItem = {
-            idTipoAlojamiento: respuesta.id, 
-            Descripcion: descripcionAgregar
-        };
-        setItems(oldItems => [...oldItems, nuevoItem]);
-        setDescripcionAgregar(null);
-      } else {
-        alert('Error al crear el tipo de alojamiento')
-      }
-    } catch (error) {
-      console.error('Error:', error);
-      alert('Error no se pudo establecer el servicio')
-    }
+    const response = await agregarItem('http://localhost:3001/tiposAlojamiento/createTipoAlojamiento', data);
+    const nuevoItem = {...data, idTipoAlojamiento: response};
+    setListaTiposAlojamiento(oldItems => [...oldItems, nuevoItem]);
+    setDescripcionAgregar(null);
   };
 
-  const eliminarItem = async (idTipoAlojamiento) => {
-    try {
-      const response = await fetch(`http://localhost:3001/tiposAlojamiento/deleteTipoAlojamiento/${idTipoAlojamiento}`, {
-        method: 'DELETE'
-      });
-      if (response.ok) {
-        setItems(oldItems => oldItems.filter(item => item.idTipoAlojamiento !== idTipoAlojamiento));
-      } else {
-        alert('Error al eliminar el tipo de alojamiento')
-      }
-    } catch (error) {
-      console.error('Error:', error);
-      alert('Error no se pudo establecer el servicio')
-    }
+  const eliminarTipoAlojamiento = async (id) => {
+    const response = await eliminarItem(`http://localhost:3001/tiposAlojamiento/deleteTipoAlojamiento/${id}`)
+    if (response) {
+      setListaTiposAlojamiento(oldItems => oldItems.filter(item => item.idTipoAlojamiento !== id));
+    };
   };
 
   const iniciarModificacion = (idTipoAlojamiento) => {
-    const item = items.find(item => item.idTipoAlojamiento === idTipoAlojamiento);
+    const item = listaTiposAlojamiento.find(item => item.idTipoAlojamiento === idTipoAlojamiento);
     setDescripcionOriginal(item.Descripcion);
     setDescripcionAModificar(item.descripcionAModificar);
     setItemAModificar(idTipoAlojamiento);
   };
 
-  const modificarItem = async (idTipoAlojamiento, nuevaDescripcion) => {
+  const modificarTipoAlojamiento = async (idTipoAlojamiento, nuevaDescripcion) => {
     const data = {
       Descripcion: nuevaDescripcion
     };
 
-    try {
-      const response = await fetch(`http://localhost:3001/tiposAlojamiento/putTipoAlojamiento/${idTipoAlojamiento}`, {
-        method: 'PUT',
-        headers: {
-          'Content-type': 'application/json'
-        },
-        body: JSON.stringify(data)
-      });
-      if (response.ok) {
-        setItems(oldItems => oldItems.map(item => item.idTipoAlojamiento === idTipoAlojamiento ? { ...item, Descripcion: nuevaDescripcion } : item));
-        setItemAModificar(null);
-      } else {
-        alert('Error al modificar el tipo de alojamiento')
-      }
-    } catch (error) {
-      console.error('Error:', error);
-      alert('Error no se pudo establecer el servicio')
-    }
+    const response = await modificarItem(`http://localhost:3001/tiposAlojamiento/putTipoAlojamiento/${idTipoAlojamiento}`, data)
+    if (response) {
+      setListaTiposAlojamiento(oldItems => oldItems.map(item => item.idTipoAlojamiento === idTipoAlojamiento ? { ...item, Descripcion: nuevaDescripcion } : item));
+      setItemAModificar(null);
+    };
   };
 
   const cancelarModificacion = () => {
@@ -109,7 +74,7 @@ const Admin = () => {
   };
 
   const manejarSubmit = () => {
-    agregarItem();
+    agregarTipoAlojamiento();
     setMostrarInput(false);
   };
 
@@ -128,7 +93,7 @@ const Admin = () => {
     <div className='admin-list'>
 			<h2 style={{fontWeight: '500'}}>Modo administrador</h2>
 			<h4 style={{color: 'red', marginBottom: '2em'}}>¡Precaución! Eliminar un item es una acción irreversible.</h4>
-      {items.map((item, index) => (
+      {listaTiposAlojamiento.map((item, index) => (
         <div className='admin-item-list' key={item.idTipoAlojamiento} style={{backgroundColor: index % 2 === 0 ? '#dddddd' : '#cccccc' }}>
           {itemAModificar === item.idTipoAlojamiento ? (
             <>
@@ -139,7 +104,7 @@ const Admin = () => {
                 autoFocus
               />
               <div>
-                <button className='btn-admin btn-accept' onClick={() => modificarItem(item.idTipoAlojamiento, descripcionAModificar)}>Guardar</button>
+                <button className='btn-admin btn-accept' onClick={() => modificarTipoAlojamiento(item.idTipoAlojamiento, descripcionAModificar)}>Guardar</button>
                 <button className='btn-admin mg-left' onClick={cancelarModificacion}>Cancelar</button>
               </div>
             </>
@@ -148,7 +113,7 @@ const Admin = () => {
               <p style={{ flex: 1, alignContent:'center'}}>{item.Descripcion}</p>
               <div>
                 <button className='btn-admin btn-color' onClick={() => iniciarModificacion(item.idTipoAlojamiento)}>Modificar</button>
-                <button className='btn-admin btn-color mg-left' onClick={() => eliminarItem(item.idTipoAlojamiento)}>Eliminar</button>
+                <button className='btn-admin btn-color mg-left' onClick={() => eliminarTipoAlojamiento(item.idTipoAlojamiento)}>Eliminar</button>
               </div>
             </>
           )}
@@ -164,6 +129,8 @@ const Admin = () => {
 						style={{marginTop:'1em'}} 
             autoFocus
           />
+
+
           <button className='btn-admin btn-accept mg-left' onClick={manejarSubmit}>Aceptar</button>
           <button className='btn-admin mg-left' onClick={cancelarAgregar}>Cancelar</button>
         </>
