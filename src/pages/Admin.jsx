@@ -46,7 +46,7 @@ const Admin = () => {
         alert('Error al crear el tipo de alojamiento')
       }
     } catch (error) {
-      console.error('Error:', error);
+      console.error('Error:', error); 
       alert('Error no se pudo establecer el servicio')
     }
   };

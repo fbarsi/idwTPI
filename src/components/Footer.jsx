@@ -5,7 +5,7 @@ const Footer = () => {
         <>
         <div className="footer">
         <section className="footer-container">
-            <div>
+            <div className="logo-container">
                 <img className="footer-logo" src="/img/logo.png" alt="a" />
                 <p>Stay, relax, enjoy.</p>
             </div>
@@ -31,9 +31,7 @@ const Footer = () => {
             </div>
         </section>
 
-        <hr className=""/>
-
-        <section className="footer-container">
+        <section className="footer-copyright">
             <small>&copy; 2024 Tech-in</small>
             <div className="footer-flex">
                 <p>Policies</p>

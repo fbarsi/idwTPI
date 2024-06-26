@@ -1,6 +1,7 @@
 .layout {
     width: 100%;
     display: flex;
+    justify-content: center;
     gap: 6em;
 }
 
@@ -29,6 +30,14 @@
     margin-top: 2em;
 }
 
+.button-primary:hover {
+    background-color: #002c1e;
+}
+
+.form-title-container {
+    margin-top: 3em;
+}
+
 .form-control {
     width: 24em;
 }
@@ -39,6 +48,10 @@
 
 .button-secondary {
     width: 9em;
+}
+
+.button-secondary:hover {
+    background-color: #002c1e;
 }
 
 .checkbox-label {
@@ -99,9 +112,24 @@
     margin-bottom: 1em;
 }
 
+.container {
+    padding-top: 4em;
+    margin: 0 2em;
+    display: flex;
+    flex-direction: column;
+}
+
 .card-list {
     width: 100%;
-    display: flex;
+    display: grid;
     gap: 1em;
-    flex-wrap: wrap;
+    grid-template-columns: repeat(auto-fill, minmax(14em, 1fr));
+}
+
+
+@media (max-width: 970px) {
+
+    .layout-grid {
+        display: none;
+    }
 }

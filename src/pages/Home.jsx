@@ -13,7 +13,7 @@ const Home = () => {
                         <h3 className="subtitle">Confort que te acompaña en cada viaje</h3>
                         <button className="button-primary">Descubre más</button>
                     </div>
-                    <div>
+                    <div className="form-title-container">
                         <h3 className="form-title">Encuentra tu lugar ideal</h3>
                         <form className="form">
                             <input type="text" className="form-control" placeholder="Selecciona destino" aria-label="Selecciona destino" />
@@ -31,8 +31,7 @@ const Home = () => {
                     <img className="img-4" src="/img/26517c.webp" alt="a" /> 
                 </section>
             </div>
-
-            <div>
+            <div className="container">
                 <h3 className="card-list-title">Mejores calificados del mes</h3>
                 <div className="card-list">
                     <Card
@@ -67,7 +66,7 @@ const Home = () => {
                 </div>
             </div>
 
-            <div>
+            <div className="container">
                 <h3 className="card-list-title">Ofertas exclusivas</h3>
                 <div className="card-list">
                     <Card

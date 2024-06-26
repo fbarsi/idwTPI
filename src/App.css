@@ -1,14 +1,15 @@
 main {
+  margin: 0 auto;
+  max-width: 63em;
+}
+
+.contenedor {
   padding-top: 8em;
   padding-bottom: 7em;
-  width: 59em;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 6.5em;
 }
 
 footer {
   background-color: var(--dark);
   color: var(--light);
 }
+
