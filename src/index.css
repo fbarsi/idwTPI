@@ -124,6 +124,10 @@ form {
   margin-left: 0.5em;
 }
 
+.mg-bottom {
+  margin-bottom: 0.5em;
+}
+
 .input-admin,
 .btn-admin {
   height: 2.25em;
@@ -139,6 +143,7 @@ form {
 
 .btn-admin {
   width: 6em;
+  
 }
 
 .btn-accept {
@@ -149,6 +154,24 @@ form {
 
 .btn-cancel {
   background-color: var(--cancel);
+}
+
+.input-admin {
+  width: 21em;
+}
+
+.form-alojamientos {
+  /* max-width: fit-content; */
+  display: flex;
+  /* flex-wrap: wrap; */
+  flex-direction: column;
+  /* align-items: end; */
+  gap: 0.6em;
+}
+
+.form-alojamientos div label {
+  display: block;
+  margin-bottom: 0.2em;
 }
 
 @media (max-width: 1400px) {
