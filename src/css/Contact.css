@@ -11,6 +11,10 @@
     width: 34em;
 }
 
+.button-form:hover {
+    background-color: #002c1e;
+}
+
 .contact-text-area{
     resize: none;
 }
@@ -24,4 +28,26 @@
     height: 100%;
     object-fit: cover;
     border-radius: 1em;
+}
+
+@media (max-width: 768px) {
+
+    .img-form {
+        display: none;
+    }
+
+    .contact-form,
+    .contact-text-area, 
+    .button-form {
+        width: 25em;
+}
+
+.contact-layout{
+    justify-content: center;
+}
+
+.contact-form .contact-input {
+    width: 11.5em;
+}
+    
 }

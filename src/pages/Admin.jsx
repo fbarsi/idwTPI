@@ -32,10 +32,30 @@ const Admin = () => {
     const data = {
       Descripcion: descripcionAgregar
     };
-    const response = await agregarItem('http://localhost:3001/tiposAlojamiento/createTipoAlojamiento', data);
-    const nuevoItem = {...data, idTipoAlojamiento: response};
-    setListaTiposAlojamiento(oldItems => [...oldItems, nuevoItem]);
-    setDescripcionAgregar(null);
+
+    try {
+      const response = await fetch('http://localhost:3001/tiposAlojamiento/createTipoAlojamiento', {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      });
+      if (response.ok) {
+        const respuesta = await response.json();
+        const nuevoItem = {
+            idTipoAlojamiento: respuesta.id, 
+            Descripcion: descripcionAgregar
+        };
+        setItems(oldItems => [...oldItems, nuevoItem]);
+        setDescripcionAgregar(null);
+      } else {
+        alert('Error al crear el tipo de alojamiento')
+      }
+    } catch (error) {
+      console.error('Error:', error); 
+      alert('Error no se pudo establecer el servicio')
+    }
   };
 
   const eliminarTipoAlojamiento = async (id) => {

@@ -9,6 +9,7 @@
 .about-container p{
     max-width: 60ch;
     font-size: 1.25em;
+    margin: 0 2em;
 }
 
 .imagen-ab {
