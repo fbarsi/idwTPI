@@ -67,6 +67,36 @@ const TiposAlojamiento = ({ tiposAlojamiento, setTiposAlojamiento}) => {
       Descripcion: ''
     });
   }
+  
+  const iniciarModificacion = (idTipoAlojamiento) => {
+    const item = listaTiposAlojamiento.find(item => item.idTipoAlojamiento === idTipoAlojamiento);
+    setDescripcionOriginal(item.Descripcion);
+    setDescripcionAModificar(item.descripcionAModificar);
+    setItemAModificar(idTipoAlojamiento);
+  };
+
+  const modificarTipoAlojamiento = async (idTipoAlojamiento, nuevaDescripcion) => {
+    const data = {
+      Descripcion: nuevaDescripcion
+    };
+
+    const response = await modificarItem(`http://localhost:3001/tiposAlojamiento/putTipoAlojamiento/${idTipoAlojamiento}`, data)
+    if (response) {
+      setListaTiposAlojamiento(oldItems => oldItems.map(item => item.idTipoAlojamiento === idTipoAlojamiento ? { ...item, Descripcion: nuevaDescripcion } : item));
+      setItemAModificar(null);
+    };
+  };
+
+  const cancelarModificacion = () => {
+    setDescripcionAModificar(descripcionOriginal);
+    setItemAModificar(null);
+  };
+
+  
+
+  
+
+
 
   return (
     <>
