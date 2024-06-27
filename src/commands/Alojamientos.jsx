@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 const Alojamientos = ({ alojamientos, tiposAlojamiento, setAlojamientos }) => {
-  const [formularioVisible, setFormularioVisible] = useState(false);
-  const [modificarAlojamiento, setmodificarAlojamiento] = useState({});
-
-  const [nuevoAlojamiento, setNuevoAlojamiento] = useState({
+  const [camposVacios, setCamposVacios] = useState({
     Titulo: '',
     Descripcion: '',
     idTipoAlojamiento: '',
@@ -13,35 +10,29 @@ const Alojamientos = ({ alojamientos, tiposAlojamiento, setAlojamientos }) => {
     PrecioPorDia: '',
     CantidadDormitorios: '',
     CantidadBanios: '',
-    Estado: '',
+    Estado: 'Disponible',
   });
+  const [posts, setPosts] = useState('');
+  const [formularioVisible, setFormularioVisible] = useState(false);
+  const [itemAModificar, setItemAModificar] = useState('');
+  const [nuevoAlojamiento, setNuevoAlojamiento] = useState(camposVacios);
+  const [datosOriginales, setDatosOriginales] = useState('');
+  const [datosAModificar, setDatosAModificar] = useState('');
 
   const agregarItem = async () => {
-    const data = {
-      Titulo: "Ejemplo de alojamiento",
-      Descripcion: "Descripción del alojamiento",
-      idTipoAlojamiento: 7,
-      Latitud: 12.345,
-      Longitud: 67.890,
-      PrecioPorDia: 100,
-      CantidadDormitorios: 3,
-      CantidadBanios: 2,
-      Estado: "Disponible"
-    };
-
     try {
       const response = await fetch('http://localhost:3001/alojamiento/createAlojamiento', {
         method: 'POST',
         headers: {
           'Content-type': 'application/json'
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(nuevoAlojamiento)
       });
       if (response.ok) {
         const respuesta = await response.json();
         const nuevoItem = {
           idAlojamiento: respuesta.id, 
-          ...data
+          ...nuevoAlojamiento
         };
         setAlojamientos(oldItems => [...oldItems, nuevoItem]);
       } else {
@@ -69,51 +60,89 @@ const Alojamientos = ({ alojamientos, tiposAlojamiento, setAlojamientos }) => {
     }
   };
 
-  
-
   const mostrarFormulario = () => {
     setFormularioVisible(true);
   };
 
   const ocultarFormulario = () => {
     setFormularioVisible(false);
-    setNuevoAlojamiento({
-      Titulo: '',
-      Descripcion: '',
-      idTipoAlojamiento: '',
-      Latitud: '',
-      Longitud: '',
-      PrecioPorDia: '',
-      CantidadDormitorios: '',
-      CantidadBanios: '',
-      Estado: '',
-    });
+    setNuevoAlojamiento(camposVacios);
   };
 
-  const guardarCambios = () => {
-    // Lógica para guardar los cambios (enviar a la base de datos)
-    // Usar nuevoAlojamiento para enviar los datos
-  };
+  const enviar = () => {
+    console.log(nuevoAlojamiento);
+    agregarItem();
+    setNuevoAlojamiento(camposVacios);
+  }
 
   const buscarDescripcion = (idTipo) => {
-    if (tiposAlojamiento.length) {
+    try {
       return (tiposAlojamiento.find(itemTipo => itemTipo.idTipoAlojamiento === idTipo).Descripcion)
-    } else {
+    } catch {
       console.log("no hay na")
     }
   }
-  
-  const formulariooo = (datos) => {
-    return(
-      <form className='form-alojamientos'>
+
+  const obtenerDescripcion = async (idTipo) => {
+    const [asdasd, setAsdasd] = useState('');
+    try {
+      const response = await fetch(`http://localhost:3001/tiposAlojamiento/getTipoAlojamiento/${idTipo}`);
+      const data = await response.json();
+      setAsdasd(data.Descripcion)
+      return (asdasd);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
+
+  const iniciarModificacion = (idTipoAlojamiento) => {
+    const item = tiposAlojamiento.find(item => item.idTipoAlojamiento === idTipoAlojamiento);
+    setDatosOriginales(item);
+    setDatosAModificar(item);
+    setItemAModificar(idTipoAlojamiento);
+  };
+
+  const modificarItem = async (idTipoAlojamiento) => {
+    try {
+      const response = await fetch(`http://localhost:3001/tiposAlojamiento/putTipoAlojamiento/${idTipoAlojamiento}`, {
+        method: 'PUT',
+        headers: {
+          'Content-type': 'application/json'
+        },
+        body: JSON.stringify(datosAModificar)
+      });
+      if (response.ok) {
+        setAlojamientos(oldItems => oldItems.map(item => item.idTipoAlojamiento === idTipoAlojamiento ? { ...datosAModificar } : item));
+        setItemAModificar('');
+      } else {
+        alert('Error al modificar el tipo de alojamiento')
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Error no se pudo establecer el servicio')
+    }
+  };
+
+  const cancelarModificacion = () => {
+    setDatosAModificar(datosOriginales);
+    setItemAModificar('');
+  };
+
+  return (
+    <>
+      {/* formulario */}
+
+      {formularioVisible ? (
+        <div className='form-alojamientos'>
           <div>
             <label htmlFor='titulo'>Titulo</label>
             <input
               className='input-admin' 
               id='titulo'
               type='text'
-              value={datos.Titulo}
-              onChange={(e) => setNuevoAlojamiento({ ...datos, Titulo: e.target.value })}
+              value={nuevoAlojamiento.Titulo}
+              onChange={(e) => setNuevoAlojamiento({ ...nuevoAlojamiento, Titulo: e.target.value })}
             />
           </div>
 
@@ -123,8 +152,8 @@ const Alojamientos = ({ alojamientos, tiposAlojamiento, setAlojamientos }) => {
               className='input-admin' 
               id='descripcion'
               type='text'
-              value={datos.Descripcion}
-              onChange={(e) => setNuevoAlojamiento({ ...datos, Descripcion: e.target.value })}
+              value={nuevoAlojamiento.Descripcion}
+              onChange={(e) => setNuevoAlojamiento({ ...nuevoAlojamiento, Descripcion: e.target.value })}
             />
           </div>
 
@@ -133,9 +162,10 @@ const Alojamientos = ({ alojamientos, tiposAlojamiento, setAlojamientos }) => {
             <select
               id='tipo'
               className='input-admin' 
-              value={datos.idTipoAlojamiento}
-              onChange={(e) => setNuevoAlojamiento({ ...datos, idTipoAlojamiento: e.target.value })}
-            >
+              value={nuevoAlojamiento.idTipoAlojamiento}
+              onChange={(e) => setNuevoAlojamiento({ ...nuevoAlojamiento, idTipoAlojamiento: e.target.value })}
+            > 
+              <option value=''>Elija un tipo</option>
               {tiposAlojamiento.map((tipo) => (
                 <option key={tipo.idTipoAlojamiento} value={tipo.idTipoAlojamiento}>
                   {tipo.Descripcion}
@@ -149,9 +179,9 @@ const Alojamientos = ({ alojamientos, tiposAlojamiento, setAlojamientos }) => {
             <input
               className='input-admin' 
               id='latitud'
-              type='text'
-              value={datos.Latitud}
-              onChange={(e) => setNuevoAlojamiento({ ...datos, Latitud: e.target.value })}
+              type='number'
+              value={nuevoAlojamiento.Latitud}
+              onChange={(e) => setNuevoAlojamiento({ ...nuevoAlojamiento, Latitud: e.target.value })}
             />
           </div>
 
@@ -160,9 +190,9 @@ const Alojamientos = ({ alojamientos, tiposAlojamiento, setAlojamientos }) => {
             <input
               className='input-admin' 
               id='longitud'
-              type='text'
-              value={datos.Longitud}
-              onChange={(e) => setNuevoAlojamiento({ ...datos, Longitud: e.target.value })}
+              type='number'
+              value={nuevoAlojamiento.Longitud}
+              onChange={(e) => setNuevoAlojamiento({ ...nuevoAlojamiento, Longitud: e.target.value })}
             />
           </div>
 
@@ -171,9 +201,9 @@ const Alojamientos = ({ alojamientos, tiposAlojamiento, setAlojamientos }) => {
             <input
               className='input-admin' 
               id='precioPorDia'
-              type='text'
-              value={datos.PrecioPorDia}
-              onChange={(e) => setNuevoAlojamiento({ ...datos, PrecioPorDia: e.target.value })}
+              type='number'
+              value={nuevoAlojamiento.PrecioPorDia}
+              onChange={(e) => setNuevoAlojamiento({ ...nuevoAlojamiento, PrecioPorDia: e.target.value })}
             />
           </div>
 
@@ -182,9 +212,9 @@ const Alojamientos = ({ alojamientos, tiposAlojamiento, setAlojamientos }) => {
             <input
               className='input-admin' 
               id='cantidadDormitorios'
-              type='text'
-              value={datos.CantidadDormitorios}
-              onChange={(e) => setNuevoAlojamiento({ ...datos, CantidadDormitorios: e.target.value })}
+              type='number'
+              value={nuevoAlojamiento.CantidadDormitorios}
+              onChange={(e) => setNuevoAlojamiento({ ...nuevoAlojamiento, CantidadDormitorios: e.target.value })}
             />
           </div>
 
@@ -193,9 +223,9 @@ const Alojamientos = ({ alojamientos, tiposAlojamiento, setAlojamientos }) => {
             <input
               className='input-admin' 
               id='cantidadBanios'
-              type='text'
-              value={datos.CantidadBanios}
-              onChange={(e) => setNuevoAlojamiento({ ...datos, CantidadBanios: e.target.value })}
+              type='number'
+              value={nuevoAlojamiento.CantidadBanios}
+              onChange={(e) => setNuevoAlojamiento({ ...nuevoAlojamiento, CantidadBanios: e.target.value })}
             />
           </div>
           
@@ -204,37 +234,30 @@ const Alojamientos = ({ alojamientos, tiposAlojamiento, setAlojamientos }) => {
             <select
               id='estado'
               className='input-admin' 
-              value={datos.Estado}
-              onChange={(e) => setNuevoAlojamiento({ ...datos, Estado: e.target.value })}
+              value={nuevoAlojamiento.Estado}
+              onChange={(e) => setNuevoAlojamiento({ ...nuevoAlojamiento, Estado: e.target.value })}
             >
               <option value='Disponible'>Disponible</option>
               <option value='Reservado'>Reservado</option>
             </select>
           </div>
-          <div>
-            <button className='btn-admin btn-accept' onClick={guardarCambios}>Guardar</button>
-            <button className='btn-admin mg-left' onClick={ocultarFormulario}>Cancelar</button>
-          </div>
           
-        </form>
-    )
-  }
+          <div>
+            <button className='btn-admin btn-accept' onClick={enviar}>Guardar</button>
+            <button className='btn-admin mg-left' onClick={ocultarFormulario}>Cancelar</button>
+          </div>  
 
-  return (
-    <>
-      {/* formulario */}
-
-      {formularioVisible ? (
-        formulariooo(nuevoAlojamiento)
+          <div>{nuevoAlojamiento.idTipoAlojamiento}</div>  
+          <div>{nuevoAlojamiento.Estado}</div>  
+        </div>
       ) : (
-        <button className='btn-admin btn-color' onClick={mostrarFormulario}>Crear</button>
+        <button className='btn-admin btn-color mg-bottom' onClick={mostrarFormulario}>Crear</button>
       )}
 
       {/* fin del formulario */}
-
       {alojamientos.map((item, index) => (
         <div className='admin-item-list' key={item.idAlojamiento} style={{backgroundColor: index % 2 === 0 ? '#dddddd' : '#cccccc' }}>
-          <p style={{ flex: 1, alignContent:'center'}}>{item.Descripcion} - {buscarDescripcion(item.idTipoAlojamiento)}</p>
+          <p style={{ flex: 1, alignContent:'center'}}>{item.Descripcion} - {obtenerDescripcion(item.idTipoAlojamiento)}</p>
           <div>
             <button className='btn-admin btn-color'>Modificar</button>
             <button className='btn-admin btn-color mg-left'>Eliminar</button>

@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
 
-
-
 const TiposAlojamiento = ({ tiposAlojamiento, setTiposAlojamiento}) => {
-  const [formularioVisible, setFormularioVisible] = useState(false);
-  const [nuevoTipoAlojamiento, setNuevoTipoAlojamiento] = useState({
+  const camposVacios = {
     Descripcion: '',
-  })
+  };
 
+  const [formularioVisible, setFormularioVisible] = useState(false);
+  const [itemAModificar, setItemAModificar] = useState('');
+  const [nuevoTipoAlojamiento, setNuevoTipoAlojamiento] = useState(camposVacios);
+  const [datosOriginales, setDatosOriginales] = useState('');
+  const [datosAModificar, setDatosAModificar] = useState('');
+  
   const agregarItem = async () => {
     try {
       const response = await fetch('http://localhost:3001/tiposAlojamiento/createTipoAlojamiento', {
@@ -56,48 +59,48 @@ const TiposAlojamiento = ({ tiposAlojamiento, setTiposAlojamiento}) => {
 
   const ocultarFormulario = () => {
     setFormularioVisible(false);
-    setNuevoTipoAlojamiento({
-      Descripcion: ''
-    });
+    setNuevoTipoAlojamiento(camposVacios);
   };
 
   const enviar = () => {
     agregarItem();
-    setNuevoTipoAlojamiento({
-      Descripcion: ''
-    });
+    setNuevoTipoAlojamiento(camposVacios);
   }
   
   const iniciarModificacion = (idTipoAlojamiento) => {
-    const item = listaTiposAlojamiento.find(item => item.idTipoAlojamiento === idTipoAlojamiento);
-    setDescripcionOriginal(item.Descripcion);
-    setDescripcionAModificar(item.descripcionAModificar);
+    const item = tiposAlojamiento.find(item => item.idTipoAlojamiento === idTipoAlojamiento);
+    setDatosOriginales(item);
+    setDatosAModificar(item);
     setItemAModificar(idTipoAlojamiento);
   };
 
-  const modificarTipoAlojamiento = async (idTipoAlojamiento, nuevaDescripcion) => {
-    const data = {
-      Descripcion: nuevaDescripcion
-    };
-
-    const response = await modificarItem(`http://localhost:3001/tiposAlojamiento/putTipoAlojamiento/${idTipoAlojamiento}`, data)
-    if (response) {
-      setListaTiposAlojamiento(oldItems => oldItems.map(item => item.idTipoAlojamiento === idTipoAlojamiento ? { ...item, Descripcion: nuevaDescripcion } : item));
-      setItemAModificar(null);
-    };
+  const modificarItem = async (idTipoAlojamiento) => {
+    try {
+      const response = await fetch(`http://localhost:3001/tiposAlojamiento/putTipoAlojamiento/${idTipoAlojamiento}`, {
+        method: 'PUT',
+        headers: {
+          'Content-type': 'application/json'
+        },
+        body: JSON.stringify(datosAModificar)
+      });
+      if (response.ok) {
+        setTiposAlojamiento(oldItems => oldItems.map(item => item.idTipoAlojamiento === idTipoAlojamiento ? { ...datosAModificar } : item));
+        setItemAModificar('');
+      } else {
+        alert('Error al modificar el tipo de alojamiento')
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Error no se pudo establecer el servicio')
+    }
   };
 
   const cancelarModificacion = () => {
-    setDescripcionAModificar(descripcionOriginal);
-    setItemAModificar(null);
+    setDatosAModificar(datosOriginales);
+    setItemAModificar('');
   };
 
   
-
-  
-
-
-
   return (
     <>
       {formularioVisible ? (
@@ -106,24 +109,40 @@ const TiposAlojamiento = ({ tiposAlojamiento, setTiposAlojamiento}) => {
           className='input-admin' 
           value={nuevoTipoAlojamiento.Descripcion} 
           onChange={(e) => setNuevoTipoAlojamiento({ ...nuevoTipoAlojamiento, Descripcion: e.target.value })} 
-          style={{}} 
           autoFocus
         />
 
 
         <button className='btn-admin btn-accept mg-left' onClick={enviar}>Aceptar</button>
-        <button className='btn-admin mg-left' onClick={ocultarFormulario}>Cancelar</button>
+        <button className='btn-admin mg-left mg-bottom' onClick={ocultarFormulario}>Cancelar</button>
       </>
       ) : (
-        <button className='btn-admin btn-color' onClick={mostrarFormulario}>Crear</button>
+        <button className='btn-admin btn-color mg-bottom' onClick={mostrarFormulario}>Crear</button>
       )}
       {tiposAlojamiento.map((item, index) => (
         <div className='admin-item-list' key={item.idTipoAlojamiento} style={{backgroundColor: index % 2 === 0 ? '#dddddd' : '#cccccc' }}>
-          <p style={{ flex: 1, alignContent:'center'}}>{item.Descripcion}</p>
-          <div>
-            <button className='btn-admin btn-color'>Modificar</button>
-            <button className='btn-admin btn-color mg-left' onClick={() => eliminarItem(item.idTipoAlojamiento)}>Eliminar</button>
-          </div>
+          {itemAModificar === item.idTipoAlojamiento ? (
+            <>
+                <input 
+                  className='input-admin' 
+                  value={datosAModificar.Descripcion} 
+                  onChange={(e) => setDatosAModificar({...datosAModificar, Descripcion: e.target.value})} 
+                  autoFocus
+                />
+                <div>
+                <button className='btn-admin btn-accept' onClick={() => modificarItem(item.idTipoAlojamiento)}>Guardar</button>
+                <button className='btn-admin mg-left' onClick={cancelarModificacion}>Cancelar</button>
+                </div>
+            </>
+            ) : (
+            <>
+                <p style={{ flex: 1, alignContent:'center'}}>{item.Descripcion}</p>
+                <div>
+                <button className='btn-admin btn-color' onClick={() => iniciarModificacion(item.idTipoAlojamiento)}>Modificar</button>
+                <button className='btn-admin btn-color mg-left' onClick={() => eliminarItem(item.idTipoAlojamiento)}>Eliminar</button>
+                </div>
+            </>
+          )}
         </div>
       ))}
     </>
