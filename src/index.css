@@ -139,6 +139,7 @@ form {
 
 .btn-admin {
   width: 6em;
+  margin-bottom: 0.5em;
 }
 
 .btn-accept {
@@ -151,8 +152,28 @@ form {
   background-color: var(--cancel);
 }
 
+.input-admin {
+  width: 21em;
+}
+
+.form-alojamientos {
+  /* max-width: fit-content; */
+  display: flex;
+  /* flex-wrap: wrap; */
+  /* flex-direction: row; */
+  /* align-items: end; */
+  gap: 0.6em;
+}
+
+.form-alojamientos div label {
+  display: block;
+  margin-bottom: 0.2em;
+}
+
 @media (max-width: 1400px) {
   body {
     font-size: 1rem;
   }
 }
+
+
