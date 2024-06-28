@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Alojamientos from '../commands/Alojamientos';
 import TiposAlojamiento from '../commands/TiposAlojamiento';
+import Alojamientos2 from '../commands/Alojamientos2';
+import Servicios from '../commands/Servicios';
 
 
 const Admin = () => {
@@ -81,6 +83,8 @@ const Admin = () => {
       <h2 style={{fontWeight: '500'}}>Modo administrador</h2>
 			<h4 style={{color: 'red', marginBottom: '2em'}}>¡Precaución! Eliminar un item es una acción irreversible.</h4>
       <TiposAlojamiento tiposAlojamiento={tiposAlojamiento} setTiposAlojamiento={setTiposAlojamiento}/>
+      <br />
+      <Servicios servicios={servicios} setServicios={setServicios}/>
       <br />
 			<Alojamientos alojamientos={alojamientos} setAlojamientos={setAlojamientos} tiposAlojamiento={tiposAlojamiento}/>
     </div>
