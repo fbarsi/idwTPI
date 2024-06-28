@@ -112,7 +112,6 @@ const TiposAlojamiento = ({ tiposAlojamiento, setTiposAlojamiento}) => {
           autoFocus
         />
 
-
         <button className='btn-admin btn-accept mg-left' onClick={enviar}>Aceptar</button>
         <button className='btn-admin mg-left mg-bottom' onClick={ocultarFormulario}>Cancelar</button>
       </>
@@ -123,24 +122,24 @@ const TiposAlojamiento = ({ tiposAlojamiento, setTiposAlojamiento}) => {
         <div className='admin-item-list' key={item.idTipoAlojamiento} style={{backgroundColor: index % 2 === 0 ? '#dddddd' : '#cccccc' }}>
           {itemAModificar === item.idTipoAlojamiento ? (
             <>
-                <input 
-                  className='input-admin' 
-                  value={datosAModificar.Descripcion} 
-                  onChange={(e) => setDatosAModificar({...datosAModificar, Descripcion: e.target.value})} 
-                  autoFocus
-                />
-                <div>
-                <button className='btn-admin btn-accept' onClick={() => modificarItem(item.idTipoAlojamiento)}>Guardar</button>
-                <button className='btn-admin mg-left' onClick={cancelarModificacion}>Cancelar</button>
-                </div>
+              <input 
+                className='input-admin' 
+                value={datosAModificar.Descripcion} 
+                onChange={(e) => setDatosAModificar({...datosAModificar, Descripcion: e.target.value})} 
+                autoFocus
+              />
+              <div>
+              <button className='btn-admin btn-accept' onClick={() => modificarItem(item.idTipoAlojamiento)}>Guardar</button>
+              <button className='btn-admin mg-left' onClick={cancelarModificacion}>Cancelar</button>
+              </div>
             </>
             ) : (
             <>
-                <p style={{ flex: 1, alignContent:'center'}}>{item.Descripcion}</p>
-                <div>
-                <button className='btn-admin btn-color' onClick={() => iniciarModificacion(item.idTipoAlojamiento)}>Modificar</button>
-                <button className='btn-admin btn-color mg-left' onClick={() => eliminarItem(item.idTipoAlojamiento)}>Eliminar</button>
-                </div>
+              <p style={{ flex: 1, alignContent:'center'}}>{item.Descripcion}</p>
+              <div>
+              <button className='btn-admin btn-color' onClick={() => iniciarModificacion(item.idTipoAlojamiento)}>Modificar</button>
+              <button className='btn-admin btn-color mg-left' onClick={() => eliminarItem(item.idTipoAlojamiento)}>Eliminar</button>
+              </div>
             </>
           )}
         </div>

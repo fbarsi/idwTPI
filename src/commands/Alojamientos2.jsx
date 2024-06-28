@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const Alojamientos = ({ alojamientos, tiposAlojamiento, setAlojamientos }) => {
+const Alojamientos2 = ({ alojamientos, tiposAlojamiento, setAlojamientos }) => {
   const [camposVacios, setCamposVacios] = useState({
     Titulo: '',
     Descripcion: '',
@@ -60,20 +60,6 @@ const Alojamientos = ({ alojamientos, tiposAlojamiento, setAlojamientos }) => {
     }
   };
 
-  const mostrarFormulario = () => {
-    setFormularioVisible(true);
-  };
-
-  const ocultarFormulario = () => {
-    setFormularioVisible(false);
-    setNuevoAlojamiento(camposVacios);
-  };
-
-  const enviar = () => {
-    agregarItem();
-    setNuevoAlojamiento(camposVacios);
-  }
-
   const obtenerDescripcion = async (idTipoAlojamiento) => {
     if (descripciones[idTipoAlojamiento]) {
       return descripciones[idTipoAlojamiento];
@@ -95,45 +81,19 @@ const Alojamientos = ({ alojamientos, tiposAlojamiento, setAlojamientos }) => {
   };
 
   useEffect(() => {
-    const fetchDescripciones = async () => {
+    const fetchDescriptions = async () => {
       for (const item of alojamientos) {
         await obtenerDescripcion(item.idTipoAlojamiento);
       }
     };
-    fetchDescripciones();
+    fetchDescriptions();
   }, [alojamientos]);
 
-  const iniciarModificacion = (idTipoAlojamiento) => {
-    const item = tiposAlojamiento.find(item => item.idTipoAlojamiento === idTipoAlojamiento);
-    setDatosOriginales(item);
-    setDatosAModificar(item);
-    setItemAModificar(idTipoAlojamiento);
-  };
-
-  const modificarItem = async (idTipoAlojamiento) => {
-    try {
-      const response = await fetch(`http://localhost:3001/tiposAlojamiento/putTipoAlojamiento/${idTipoAlojamiento}`, {
-        method: 'PUT',
-        headers: {
-          'Content-type': 'application/json'
-        },
-        body: JSON.stringify(datosAModificar)
-      });
-      if (response.ok) {
-        setAlojamientos(oldItems => oldItems.map(item => item.idTipoAlojamiento === idTipoAlojamiento ? { ...datosAModificar} : item));
-        setItemAModificar('');
-      } else {
-        alert('Error al modificar el tipo de alojamiento')
-      }
-    } catch (error) {
-      console.error('Error:', error);
-      alert('Error no se pudo establecer el servicio')
-    }
-  };
-
-  const cancelarModificacion = () => {
-    setDatosAModificar(datosOriginales);
-    setItemAModificar('');
+  const mostrarFormulario = () => setFormularioVisible(true);
+  const ocultarFormulario = () => setFormularioVisible(false);
+  const enviar = () => {
+    agregarItem();
+    ocultarFormulario();
   };
 
   return (
@@ -141,27 +101,25 @@ const Alojamientos = ({ alojamientos, tiposAlojamiento, setAlojamientos }) => {
       {formularioVisible ? (
         <div className='form-alojamientos'>
           <div>
-            <label htmlFor='titulo'>Titulo</label>
+            <label htmlFor='titulo'>Título</label>
             <input
-              className='input-admin' 
+              className='input-admin'
               id='titulo'
               type='text'
               value={nuevoAlojamiento.Titulo}
               onChange={(e) => setNuevoAlojamiento({ ...nuevoAlojamiento, Titulo: e.target.value })}
             />
           </div>
-
           <div>
             <label htmlFor='descripcion'>Descripción</label>
             <input
-              className='input-admin' 
+              className='input-admin'
               id='descripcion'
               type='text'
               value={nuevoAlojamiento.Descripcion}
               onChange={(e) => setNuevoAlojamiento({ ...nuevoAlojamiento, Descripcion: e.target.value })}
             />
           </div>
-
           <div>
             <label htmlFor='tipo'>Tipo</label>
             <select
@@ -255,10 +213,12 @@ const Alojamientos = ({ alojamientos, tiposAlojamiento, setAlojamientos }) => {
       ) : (
         <button className='btn-admin btn-color mg-bottom' onClick={mostrarFormulario}>Crear</button>
       )}
-
+      {/* Fin del formulario */}
       {alojamientos.map((item, index) => (
         <div className='admin-item-list' key={item.idAlojamiento} style={{backgroundColor: index % 2 === 0 ? '#dddddd' : '#cccccc' }}>
-          <p style={{ flex: 1, alignContent:'center'}}>{item.Descripcion} - {descripciones[item.idTipoAlojamiento]}</p>
+          <p style={{ flex: 1, alignContent:'center'}}>
+            {item.Descripcion} - {descripciones[item.idTipoAlojamiento] || 'Cargando...'}
+          </p>
           <div>
             <button className='btn-admin btn-color'>Modificar</button>
             <button className='btn-admin btn-color mg-left'>Eliminar</button>
@@ -267,6 +227,6 @@ const Alojamientos = ({ alojamientos, tiposAlojamiento, setAlojamientos }) => {
       ))}
     </>
   );
-}
+};
 
-export default Alojamientos;
+export default Alojamientos2;

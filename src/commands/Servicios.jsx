@@ -1,48 +1,151 @@
-<div className='admin-list'>
-    <h2 style={{fontWeight: '500'}}>Modo administrador</h2>
-    <h4 style={{color: 'red', marginBottom: '2em'}}>¡Precaución! Eliminar un item es una acción irreversible.</h4>
-    {listaTiposAlojamiento.map((item, index) => (
-        <div className='admin-item-list' key={item.idTipoAlojamiento} style={{backgroundColor: index % 2 === 0 ? '#dddddd' : '#cccccc' }}>
-            {itemAModificar === item.idTipoAlojamiento ? (
+import React, { useState, useEffect } from 'react';
+
+const Servicios = ({ servicios, setServicios}) => {
+  const camposVacios = {
+    Nombre: '',
+  };
+
+  const [formularioVisible, setFormularioVisible] = useState(false);
+  const [itemAModificar, setItemAModificar] = useState('');
+  const [nuevoServicio, setNuevoServicio] = useState(camposVacios);
+  const [datosOriginales, setDatosOriginales] = useState('');
+  const [datosAModificar, setDatosAModificar] = useState('');
+  
+  const agregarItem = async () => {
+    try {
+      const response = await fetch('http://localhost:3001/servicio/createServicio', {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json'
+        },
+        body: JSON.stringify(nuevoServicio)
+      });
+      if (response.ok) {
+        const respuesta = await response.json();
+        const nuevoItem = {
+            idServicio: respuesta.id, 
+            ...nuevoServicio
+        };
+        setServicios(oldItems => [...oldItems, nuevoItem]);
+      } else {
+        alert('Error al crear el tipo de alojamiento')
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Error no se pudo establecer el servicio')
+    }
+  };
+
+  const eliminarItem = async (idServicio) => {
+    try {
+      const response = await fetch(`http://localhost:3001/servicio/deleteServicio/${idServicio}`, {
+        method: 'DELETE'
+      });
+      if (response.ok) {
+        setServicios(oldItems => oldItems.filter(item => item.idServicio !== idServicio));
+      } else {
+        alert('Error al eliminar el tipo de alojamiento')
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Error no se pudo establecer el servicio')
+    }
+  };
+
+
+  const mostrarFormulario = () => {
+    setFormularioVisible(true);
+  };
+
+  const ocultarFormulario = () => {
+    setFormularioVisible(false);
+    setNuevoServicio(camposVacios);
+  };
+
+  const enviar = () => {
+    agregarItem();
+    setNuevoServicio(camposVacios);
+  }
+  
+  const iniciarModificacion = (idServicio) => {
+    const item = tiposAlojamiento.find(item => item.idServicio === idServicio);
+    setDatosOriginales(item);
+    setDatosAModificar(item);
+    setItemAModificar(idServicio);
+  };
+
+  const modificarItem = async (idServicio) => {
+    try {
+      const response = await fetch(`http://localhost:3001/servicio/putServicio/${idServicio}`, {
+        method: 'PUT',
+        headers: {
+          'Content-type': 'application/json'
+        },
+        body: JSON.stringify(datosAModificar)
+      });
+      if (response.ok) {
+        setServicios(oldItems => oldItems.map(item => item.idServicio === idServicio ? { ...datosAModificar } : item));
+        setItemAModificar('');
+      } else {
+        alert('Error al modificar el tipo de alojamiento')
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Error no se pudo establecer el servicio')
+    }
+  };
+
+  const cancelarModificacion = () => {
+    setDatosAModificar(datosOriginales);
+    setItemAModificar('');
+  };
+
+  
+  return (
+    <>
+      {formularioVisible ? (
+      <>
+        <input 
+          className='input-admin' 
+          value={nuevoServicio.Nombre} 
+          onChange={(e) => setNuevoServicio({ ...nuevoServicio, Nombre: e.target.value })} 
+          autoFocus
+        />
+
+        <button className='btn-admin btn-accept mg-left' onClick={enviar}>Aceptar</button>
+        <button className='btn-admin mg-left mg-bottom' onClick={ocultarFormulario}>Cancelar</button>
+      </>
+      ) : (
+        <button className='btn-admin btn-color mg-bottom' onClick={mostrarFormulario}>Crear</button>
+      )}
+      {servicios.map((item, index) => (
+        <div className='admin-item-list' key={item.idServicio} style={{backgroundColor: index % 2 === 0 ? '#dddddd' : '#cccccc' }}>
+          {itemAModificar === item.idServicio ? (
             <>
-                <input 
+              <input 
                 className='input-admin' 
-                value={descripcionAModificar} 
-                onChange={(e) => setDescripcionAModificar(e.target.value)} 
+                value={datosAModificar.Nombre} 
+                onChange={(e) => setDatosAModificar({...datosAModificar, Nombre: e.target.value})} 
                 autoFocus
-                />
-                <div>
-                <button className='btn-admin btn-accept' onClick={() => modificarTipoAlojamiento(item.idTipoAlojamiento, descripcionAModificar)}>Guardar</button>
-                <button className='btn-admin mg-left' onClick={cancelarModificacion}>Cancelar</button>
-                </div>
+              />
+              <div>
+              <button className='btn-admin btn-accept' onClick={() => modificarItem(item.idServicio)}>Guardar</button>
+              <button className='btn-admin mg-left' onClick={cancelarModificacion}>Cancelar</button>
+              </div>
             </>
             ) : (
             <>
-                <p style={{ flex: 1, alignContent:'center'}}>{item.Descripcion}</p>
-                <div>
-                <button className='btn-admin btn-color' onClick={() => iniciarModificacion(item.idTipoAlojamiento)}>Modificar</button>
-                <button className='btn-admin btn-color mg-left' onClick={() => eliminarTipoAlojamiento(item.idTipoAlojamiento)}>Eliminar</button>
-                </div>
+              <p style={{ flex: 1, alignContent:'center'}}>{item.Nombre}</p>
+              <div>
+              <button className='btn-admin btn-color' onClick={() => iniciarModificacion(item.idServicio)}>Modificar</button>
+              <button className='btn-admin btn-color mg-left' onClick={() => eliminarItem(item.idServicio)}>Eliminar</button>
+              </div>
             </>
-            )}
+          )}
         </div>
-    ))}
-    {mostrarInput ? (
-    <>
-        <input 
-        className='input-admin' 
-        value={descripcionAgregar} 
-        onChange={(e) => setDescripcionAgregar(e.target.value)} 
-        onKeyDown={(e) => manejarKeyDown(e, manejarSubmit)}
-        style={{marginTop:'1em'}} 
-        autoFocus
-        />
-
-
-        <button className='btn-admin btn-accept mg-left' onClick={manejarSubmit}>Aceptar</button>
-        <button className='btn-admin mg-left' onClick={cancelarAgregar}>Cancelar</button>
+      ))}
     </>
-    ) : (
-        <button className='input-admin btn-color' onClick={manejarClickAgregar} style={{marginTop:'1em', padding: '1em 2em', height:'auto'}}>Agregar item</button>
-    )}
-</div>
+  );
+}
+
+export default Servicios;
